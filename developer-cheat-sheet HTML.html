@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Cheat Sheets Collection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            color: #1f2937;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .cheat-sheets {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .cheat-sheet {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+        
+        .sheet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #e5e7eb;
+        }
+        
+        .sheet-icon {
+            width: 48px;
+            height: 48px;
+            margin-right: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .sheet-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "▶";
+            color: #667eea;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .command-list {
+            list-style: none;
+        }
+        
+        .command-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .command-item:last-child {
+            border-bottom: none;
+        }
+        
+        .command {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            color: #1e40af;
+            background: #dbeafe;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+        
+        .description {
+            color: #4b5563;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+        
+        .regex-pattern {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+        
+        .shortcut {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            color: #059669;
+            background: #ecfdf5;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+        
+        .example {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #6b7280;
+            background: #f3f4f6;
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            border-left: 3px solid #d1d5db;
+        }
+        
+        .note {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+        
+        .note::before {
+            content: "💡 ";
+            margin-right: 0.5rem;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 1rem;
+            }
+            
+            .header {
+                color: #1f2937;
+                margin-bottom: 2rem;
+            }
+            
+            .cheat-sheet {
+                box-shadow: none;
+                border: 1px solid #e5e7eb;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .command-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .command, .regex-pattern, .shortcut {
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Developer Cheat Sheets</h1>
+            <p>Essential references for Linux, Regex, and VS Code</p>
+        </div>
+        
+        <div class="cheat-sheets">
+            <!-- Linux Command Line Cheat Sheet -->
+            <div class="cheat-sheet">
+                <div class="sheet-header">
+                    <div class="sheet-icon">🐧</div>
+                    <h2 class="sheet-title">Linux Command Line Cheat Sheet</h2>
+                </div>
+                
+                <div class="sections">
+                    <div class="section">
+                        <h3 class="section-title">File Operations</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="command">ls -la</span>
+                                <span class="description">List all files with details and hidden files</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">cp file1 file2</span>
+                                <span class="description">Copy file1 to file2</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">mv file1 file2</span>
+                                <span class="description">Move/rename file1 to file2</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">rm -rf dir/</span>
+                                <span class="description">Remove directory and contents recursively</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">find . -name "*.txt"</span>
+                                <span class="description">Find all .txt files in current directory</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">chmod 755 file</span>
+                                <span class="description">Change file permissions (rwxr-xr-x)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Directory Navigation</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="command">pwd</span>
+                                <span class="description">Show current directory path</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">cd ~</span>
+                                <span class="description">Go to home directory</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">cd ..</span>
+                                <span class="description">Go up one directory level</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">cd -</span>
+                                <span class="description">Go to previous directory</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">mkdir -p dir/subdir</span>
+                                <span class="description">Create directory with parent directories</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Text Processing</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="command">cat file.txt</span>
+                                <span class="description">Display file contents</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">grep "pattern" file</span>
+                                <span class="description">Search for pattern in file</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">head -n 10 file</span>
+                                <span class="description">Show first 10 lines of file</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">tail -f file</span>
+                                <span class="description">Follow file changes in real-time</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">wc -l file</span>
+                                <span class="description">Count lines in file</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">sort file | uniq</span>
+                                <span class="description">Sort and remove duplicate lines</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">System Information</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="command">ps aux</span>
+                                <span class="description">Show all running processes</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">top</span>
+                                <span class="description">Display running processes (interactive)</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">df -h</span>
+                                <span class="description">Show disk space usage</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">free -h</span>
+                                <span class="description">Show memory usage</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">uname -a</span>
+                                <span class="description">Show system information</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Network & Archives</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="command">wget url</span>
+                                <span class="description">Download file from URL</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">curl -O url</span>
+                                <span class="description">Download file with original name</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">tar -xzf file.tar.gz</span>
+                                <span class="description">Extract gzipped tar archive</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">tar -czf archive.tar.gz dir/</span>
+                                <span class="description">Create gzipped tar archive</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">ssh user@host</span>
+                                <span class="description">Connect to remote host via SSH</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Useful Shortcuts</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="command">Ctrl + C</span>
+                                <span class="description">Interrupt/kill current process</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">Ctrl + Z</span>
+                                <span class="description">Suspend current process</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">Ctrl + R</span>
+                                <span class="description">Search command history</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">!!</span>
+                                <span class="description">Repeat last command</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="command">history</span>
+                                <span class="description">Show command history</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    Use 'man command' to get detailed help for any command. Press 'q' to exit man pages.
+                </div>
+            </div>
+            
+            <!-- Regex Mini Guide -->
+            <div class="cheat-sheet">
+                <div class="sheet-header">
+                    <div class="sheet-icon">🔍</div>
+                    <h2 class="sheet-title">Regular Expressions (Regex) Mini Guide</h2>
+                </div>
+                
+                <div class="sections">
+                    <div class="section">
+                        <h3 class="section-title">Basic Patterns</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="regex-pattern">.</span>
+                                <span class="description">Matches any single character except newline</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">^</span>
+                                <span class="description">Matches start of string/line</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">$</span>
+                                <span class="description">Matches end of string/line</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">*</span>
+                                <span class="description">Matches 0 or more of preceding element</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">+</span>
+                                <span class="description">Matches 1 or more of preceding element</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">?</span>
+                                <span class="description">Matches 0 or 1 of preceding element</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Character Classes</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="regex-pattern">[abc]</span>
+                                <span class="description">Matches any character a, b, or c</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">[a-z]</span>
+                                <span class="description">Matches any lowercase letter</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">[A-Z]</span>
+                                <span class="description">Matches any uppercase letter</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">[0-9]</span>
+                                <span class="description">Matches any digit</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">[^abc]</span>
+                                <span class="description">Matches any character except a, b, or c</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Predefined Classes</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="regex-pattern">\d</span>
+                                <span class="description">Matches any digit (same as [0-9])</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">\w</span>
+                                <span class="description">Matches word character [a-zA-Z0-9_]</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">\s</span>
+                                <span class="description">Matches whitespace character</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">\D</span>
+                                <span class="description">Matches non-digit character</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">\W</span>
+                                <span class="description">Matches non-word character</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">\S</span>
+                                <span class="description">Matches non-whitespace character</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Quantifiers</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="regex-pattern">{n}</span>
+                                <span class="description">Matches exactly n occurrences</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">{n,}</span>
+                                <span class="description">Matches n or more occurrences</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">{n,m}</span>
+                                <span class="description">Matches between n and m occurrences</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">*?</span>
+                                <span class="description">Non-greedy match (0 or more)</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">+?</span>
+                                <span class="description">Non-greedy match (1 or more)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Groups & Alternation</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="regex-pattern">(abc)</span>
+                                <span class="description">Capturing group</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">(?:abc)</span>
+                                <span class="description">Non-capturing group</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">a|b</span>
+                                <span class="description">Matches either a or b</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">\1</span>
+                                <span class="description">Backreference to first group</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Common Examples</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="regex-pattern">^\d{3}-\d{3}-\d{4}$</span>
+                                <span class="description">Phone number (123-456-7890)</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</span>
+                                <span class="description">Email address</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">^https?://</span>
+                                <span class="description">URL starting with http or https</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="regex-pattern">^\d{4}-\d{2}-\d{2}$</span>
+                                <span class="description">Date format (YYYY-MM-DD)</span>
+                            </li>
+                        </ul>
+                        <div class="example">
+                            Example: /\b\w{5}\b/g matches all 5-letter words
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    Test your regex patterns at regex101.com or regexr.com for interactive debugging and explanations.
+                </div>
+            </div>
+            
+            <!-- VS Code Shortcuts Cheat Sheet -->
+            <div class="cheat-sheet">
+                <div class="sheet-header">
+                    <div class="sheet-icon">⚡</div>
+                    <h2 class="sheet-title">VS Code Shortcuts Cheat Sheet</h2>
+                </div>
+                
+                <div class="sections">
+                    <div class="section">
+                        <h3 class="section-title">General</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+P</span>
+                                <span class="description">Command Palette</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+P</span>
+                                <span class="description">Quick Open (Go to File)</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+N</span>
+                                <span class="description">New Window</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+W</span>
+                                <span class="description">Close Window</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+,</span>
+                                <span class="description">Open Settings</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+K Ctrl+S</span>
+                                <span class="description">Keyboard Shortcuts</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">File Management</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+N</span>
+                                <span class="description">New File</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+O</span>
+                                <span class="description">Open File</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+S</span>
+                                <span class="description">Save File</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+S</span>
+                                <span class="description">Save As</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+K S</span>
+                                <span class="description">Save All</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+F4</span>
+                                <span class="description">Close File</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Editing</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+X</span>
+                                <span class="description">Cut Line (empty selection)</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+C</span>
+                                <span class="description">Copy Line (empty selection)</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Alt+↑/↓</span>
+                                <span class="description">Move Line Up/Down</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Shift+Alt+↓/↑</span>
+                                <span class="description">Copy Line Up/Down</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+K</span>
+                                <span class="description">Delete Line</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Enter</span>
+                                <span class="description">Insert Line Below</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Selection</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+A</span>
+                                <span class="description">Select All</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+L</span>
+                                <span class="description">Select Current Line</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+D</span>
+                                <span class="description">Select Word / Next Occurrence</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+K Ctrl+D</span>
+                                <span class="description">Move Last Selection to Next Find Match</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Alt+Click</span>
+                                <span class="description">Insert Cursor</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Alt+↑/↓</span>
+                                <span class="description">Insert Cursor Above/Below</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Search & Replace</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+F</span>
+                                <span class="description">Find</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+H</span>
+                                <span class="description">Replace</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">F3 / Shift+F3</span>
+                                <span class="description">Find Next/Previous</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+F</span>
+                                <span class="description">Find in Files</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+H</span>
+                                <span class="description">Replace in Files</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Navigation</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+G</span>
+                                <span class="description">Go to Line</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Tab</span>
+                                <span class="description">Switch Between Tabs</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+1/2/3</span>
+                                <span class="description">Focus Editor Group</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+\</span>
+                                <span class="description">Split Editor</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">F12</span>
+                                <span class="description">Go to Definition</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Alt+F12</span>
+                                <span class="description">Peek Definition</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Debug & Terminal</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">F5</span>
+                                <span class="description">Start/Continue Debugging</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">F9</span>
+                                <span class="description">Toggle Breakpoint</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">F10</span>
+                                <span class="description">Step Over</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">F11</span>
+                                <span class="description">Step Into</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+`</span>
+                                <span class="description">Show Integrated Terminal</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+`</span>
+                                <span class="description">Create New Terminal</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Display</h3>
+                        <ul class="command-list">
+                            <li class="command-item">
+                                <span class="shortcut">F11</span>
+                                <span class="description">Toggle Full Screen</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+B</span>
+                                <span class="description">Toggle Sidebar</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+E</span>
+                                <span class="description">Show Explorer</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+G</span>
+                                <span class="description">Show Source Control</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+D</span>
+                                <span class="description">Show Debug</span>
+                            </li>
+                            <li class="command-item">
+                                <span class="shortcut">Ctrl+Shift+X</span>
+                                <span class="description">Show Extensions</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    On Mac, replace Ctrl with Cmd (⌘) for most shortcuts. Use Ctrl+Shift+P to access all available commands.
+                </div>
+            </div>
+        </div>
+    </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9743d8d167583eca',t:'MTc1NjA0ODk2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
